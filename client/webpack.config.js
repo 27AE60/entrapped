@@ -1,13 +1,12 @@
 'use strict'
 
-var src = '/src',
-  dist = '/dist';
+var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname + '/src',
   entry: [
-    './app.jsx',
-    './templates/index.html'
+    'webpack/hot/only-dev-server',
+    './src/app.jsx',
+    './src/templates/index.html'
   ],
 
   output: {
@@ -22,6 +21,11 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
+        loaders: ['react-hot', 'babel']
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
@@ -29,5 +33,10 @@ module.exports = {
         loader: "file?name=[name].[ext]",
       },
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
