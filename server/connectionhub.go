@@ -76,23 +76,19 @@ func (ch *connectionhub) run() {
 						if len(err) != 0 {
 							m.t.data <- []byte(err)
 						} else {
-							if life == 0 {
-								m.t.data <- []byte("error:game over")
-							} else {
-								if val, ok := ch.matches[m.t]; ok {
-									m.t.data <- []byte(resultState +
+							if val, ok := ch.matches[m.t]; ok {
+								m.t.data <- []byte(resultState +
+									"[idx=" + msg.params["idx"] + "]:[type=" + strconv.Itoa(ele) +
+									"]:[life=" + strconv.Itoa(life) + "]")
+								if val != nil {
+									val.data <- []byte(enemyState +
 										"[idx=" + msg.params["idx"] + "]:[type=" + strconv.Itoa(ele) +
 										"]:[life=" + strconv.Itoa(life) + "]")
-									if val != nil {
-										val.data <- []byte(enemyState +
-											"[idx=" + msg.params["idx"] + "]:[type=" + strconv.Itoa(ele) +
-											"]:[life=" + strconv.Itoa(life) + "]")
-									} else {
-										m.t.data <- []byte("data:result:[status:won]")
-									}
 								} else {
-									m.t.data <- []byte("error:no oponent")
+									m.t.data <- []byte("data:result:[status:won]")
 								}
+							} else {
+								m.t.data <- []byte("error:no oponent")
 							}
 						}
 					}
