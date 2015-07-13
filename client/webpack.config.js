@@ -7,7 +7,8 @@ module.exports = {
     'webpack/hot/only-dev-server',
     './src/app.jsx',
     './src/templates/index.html',
-    './src/styles/main.css'
+    './src/styles/main.css',
+    './src/public/font/1942.ttf'
   ],
 
   output: {
@@ -37,6 +38,10 @@ module.exports = {
         test: /\.css$/,
         loader: "file?name=[name].[ext]",
       },
+      {
+        test: /\.ttf$/,
+        loader: "file?name=[name].[ext]",
+      }
     ]
   },
 
