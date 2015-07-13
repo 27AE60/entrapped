@@ -13,11 +13,11 @@
 }
 
 .block__visited {
-  background-color: #16a085;
+  background-color: #C8C8C8;
 }
 
 .block__dead {
-  background-color: #e74c3c;
+  background-color: #D36B6B;
 }
 
 /* field */
@@ -52,7 +52,7 @@
   position: relative;
   clear: both;
   text-align: center;
-  padding: 4em;
+  padding: 3em;
 }
 .life-status__active {
   color: #e74c3c;
