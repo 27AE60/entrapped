@@ -5,13 +5,19 @@ import (
 	"net/http"
 )
 
+const (
+	size     int = 7
+	numBombs int = 10
+	lifes    int = 5
+)
+
 func Start(addr string) {
 	if len(addr) == 0 {
 		addr = ":7000"
 	}
 
 	// initialize hunt
-	go hub.run()
+	go ch.run()
 
 	// initialize router
 	router := httprouter.New()
@@ -20,6 +26,7 @@ func Start(addr string) {
 	router.GET("/", home)
 	router.GET("/players/:id", addPlayer)
 
+	// start listening to incoming connections
 	listenErr := http.ListenAndServe(addr, router)
 	if listenErr != nil {
 		logger.Println(listenErr)
@@ -30,13 +37,15 @@ func Start(addr string) {
 func addPlayer(rw http.ResponseWriter, req *http.Request, params httprouter.Params) {
 	id := params.ByName("id")
 
-	conn, connErr := newConnection(rw, req)
-	if connErr != nil {
-		error500(rw, connErr)
+	ws, wsErr := upgrader.Upgrade(rw, req, nil)
+	if wsErr != nil {
+		logger.Println(wsErr)
 		return
 	}
 
-	hub.add(id, conn)
+	trap := makeTrap(size, numBombs, lifes)
+
+	ch.add(&trooper{id, trap, ws, make(chan []byte, 512)})
 }
 
 func home(rw http.ResponseWriter, req *http.Request, _ httprouter.Params) {
