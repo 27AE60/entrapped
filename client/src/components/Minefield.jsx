@@ -9,7 +9,8 @@ class Minefield extends React.Component {
     super();
 
     this.state = {
-      mines : MinesStore.getMines()
+      mines : MinesStore.getMines(),
+      username: MinesStore.getUsername()
     };
 
     // connect
@@ -37,7 +38,7 @@ class Minefield extends React.Component {
           </div>
 
           <div className="minefield minefield__user">
-            <blockquote>Your Minefield.</blockquote>
+            <blockquote>{this.state.username}, Your Minefield.</blockquote>
             <Blocks size={7} mines={this.state.mines} />
             <div className="life-status">
               <span>

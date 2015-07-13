@@ -3,18 +3,18 @@ var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 var AppConstants = require('../constants/app_constants.js');
 
-/* 
+/*
  * Minesfield.
  *
  * Status:
- *  
- *     0 : default, not clicked, 
- *    -1 : visited, 
- *     2 : life, 
- *    -2 : death 
+ *
+ *     0 : default, not clicked,
+ *    -1 : visited,
+ *     2 : life,
+ *    -2 : death
  *
  * Size: 7 by 7
- *    
+ *
  * Mines position (x, y) from array can be calculated by,:
  *    x : index of an element / size of minesfield
  *    y : index of an element % size of minesfield
@@ -30,6 +30,8 @@ var mines = [
   0, 0, 0, 0, 0, 0, -1,
 ];
 
+/* username */
+var username = '';
 
 var MinesStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -47,6 +49,14 @@ var MinesStore = assign({}, EventEmitter.prototype, {
   'getMines': function() {
     return mines;
   },
+
+  'addUsername': function(name) {
+    username = name;
+  },
+
+  'getUsername': function() {
+    return username;
+  }
 });
 
 MinesStore.dispatchToken = AppDispatcher.register(function(payload) {
