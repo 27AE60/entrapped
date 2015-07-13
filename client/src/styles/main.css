@@ -20,6 +20,8 @@
   background-color: #D36B6B;
 }
 
+
+
 /* field */
 .minefield {
   width: 50%;
@@ -36,6 +38,8 @@
   float: right;
 }
 
+
+
 /* turn */
 .turn {
   text-align: center;
@@ -46,6 +50,8 @@
 .heart-icons {
   margin: 5px;
 }
+
+
 
 /* life */
 .life-status {
@@ -58,3 +64,32 @@
   color: #e74c3c;
 }
 
+@font-face {
+  font-family: "1942 report";
+  src: url(1942.ttf);
+}
+
+
+/* home */
+.home {
+  text-align: center;
+  font-family: "1942 report";
+}
+.home__title {
+  margin-top: 5em;
+}
+
+.nickname {
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+.nickname__input {
+  border: 0;
+  border-bottom: 1px solid;
+  text-align: center;
+  font-size: 1.5em;
+  line-height: 45px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  outline: none;
+}

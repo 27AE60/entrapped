@@ -2,13 +2,18 @@ import React from 'react';
 
 import Blocks from './Blocks.jsx';
 import MinesStore from '../stores/minestore.js';
+import Api from '../api/api.js';
 
 class Minefield extends React.Component {
   constructor() {
     super();
+
     this.state = {
       mines : MinesStore.getMines()
-    }
+    };
+
+    // connect
+    Api.connect();
   }
 
   render() {
