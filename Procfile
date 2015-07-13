@@ -1,1 +1,1 @@
-web: entrapped-cmd
+web: entrapped
