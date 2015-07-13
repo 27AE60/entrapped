@@ -14,7 +14,7 @@ class Minefield extends React.Component {
     };
 
     // connect
-    Api.connect();
+    Api.connect(MinesStore.getUsername());
   }
 
   render() {

@@ -63,13 +63,28 @@ MinesStore.dispatchToken = AppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
-    case ActionTypes.GET_MINES_SUCCESS:
-      console.log('mines', action);
-      MinesStore.emitChange();
+    case 'registered':
+      console.log('user registered');
+      break;
+
+    case 'ready':
+      console.log('ready');
+      break;
+
+    case 'open':
+      console.log('open');
+      break;
+
+    case 'result':
+      console.log('result');
+      break;
+
+    case 'enemy':
+      console.log('enemy');
       break;
 
     default:
-    // do nothing
+      // do nothing
   }
 });
 
