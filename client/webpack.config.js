@@ -6,7 +6,8 @@ module.exports = {
   entry: [
     'webpack/hot/only-dev-server',
     './src/app.jsx',
-    './src/templates/index.html'
+    './src/templates/index.html',
+    './src/styles/main.css'
   ],
 
   output: {
@@ -30,6 +31,10 @@ module.exports = {
       },
       {
         test: /\.html$/,
+        loader: "file?name=[name].[ext]",
+      },
+      {
+        test: /\.css$/,
         loader: "file?name=[name].[ext]",
       },
     ]

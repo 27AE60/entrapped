@@ -1,0 +1,60 @@
+/* block css */
+.blocks {
+  margin: auto;
+}
+.block {
+  width: 45px;
+  height: 45px;
+  background-color: #eee;
+}
+
+.block:hover {
+  background-color: #A8CAC5;
+}
+
+.block__visited {
+  background-color: #16a085;
+}
+
+.block__dead {
+  background-color: #e74c3c;
+}
+
+/* field */
+.minefield {
+  width: 50%;
+  text-align: center;
+}
+.minefield__wrapper {
+  width: 80%;
+  margin: auto;
+}
+.minefield__enemy {
+  float: left;
+}
+.minefield__user {
+  float: right;
+}
+
+/* turn */
+.turn {
+  text-align: center;
+  margin: 1em;
+}
+
+/* hearts */
+.heart-icons {
+  margin: 5px;
+}
+
+/* life */
+.life-status {
+  position: relative;
+  clear: both;
+  text-align: center;
+  padding: 4em;
+}
+.life-status__active {
+  color: #e74c3c;
+}
+
