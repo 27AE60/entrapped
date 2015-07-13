@@ -1,7 +1,7 @@
 package entrapped
 
 import (
-	"github.com/SKatiyar/entrapped/server/Godeps/_workspace/src/github.com/julienschmidt/httprouter"
+	"github.com/SKatiyar/entrapped/Godeps/_workspace/src/github.com/julienschmidt/httprouter"
 	"net/http"
 )
 

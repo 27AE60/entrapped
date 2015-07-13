@@ -1,7 +1,7 @@
 package entrapped
 
 import (
-	"github.com/SKatiyar/entrapped/server/Godeps/_workspace/src/github.com/gorilla/websocket"
+	"github.com/SKatiyar/entrapped/Godeps/_workspace/src/github.com/gorilla/websocket"
 	"net/http"
 	"time"
 )
