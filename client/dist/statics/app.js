@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "97eb8656ba54a5710717"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "539890310c4b243e1955"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -25895,7 +25895,7 @@
 	      return _reactAddons2['default'].createElement(
 	        'div',
 	        { className: classes },
-	        _reactAddons2['default'].createElement(_BlocksJsx2['default'], { size: 7, mines: this.props.player.mines }),
+	        _reactAddons2['default'].createElement(_BlocksJsx2['default'], { size: this.props.player.size, mines: this.props.player.mines, of: this.props.of }),
 	        _reactAddons2['default'].createElement(
 	          'div',
 	          { className: 'life-status' },
@@ -28101,7 +28101,8 @@
 	    value: function render() {
 	      var cx = _reactAddons2['default'].addons.classSet;
 	      var classes = cx({
-	        'block': true,
+	        'block': this.props.of !== 'player',
+	        'block__enemy': this.props.of === 'player',
 	        'block__visited': this.props.status === 0 || this.props.status === 9,
 	        'block__dead': this.props.status === -2
 	      });
@@ -28111,8 +28112,15 @@
 	  }, {
 	    key: 'handleClick',
 	    value: function handleClick() {
+	      if (this.props.of === 'player') {
+	        return;
+	      }
+
 	      var msg = 'data:open:[idx=' + this.props.index + ']:[help=9]';
 	      _apiApiJs2['default'].send(msg);
+
+	      /* beep is a global function intended for fun */
+	      beep();
 	    }
 	  }]);
 
@@ -28120,8 +28128,8 @@
 	})(_reactAddons2['default'].Component);
 
 	;
-	Block.propTypes = { status: _reactAddons2['default'].PropTypes.number, index: _reactAddons2['default'].PropTypes.number };
-	Block.defaultProps = { status: 0, index: 0 };
+	Block.propTypes = { status: _reactAddons2['default'].PropTypes.number, index: _reactAddons2['default'].PropTypes.number, of: _reactAddons2['default'].PropTypes.string };
+	Block.defaultProps = { status: 0, index: 0, of: null };
 
 	var Blocks = (function (_React$Component2) {
 	  _inherits(Blocks, _React$Component2);
@@ -28144,7 +28152,7 @@
 
 	        for (var j = 0; j < size; j++) {
 	          var index = i * size + j;
-	          _blocks.push(_reactAddons2['default'].createElement(Block, { key: 'block-' + index, status: this.props.mines[index], index: index }));
+	          _blocks.push(_reactAddons2['default'].createElement(Block, { key: 'block-' + index, status: this.props.mines[index], index: index, of: this.props.of }));
 	        }
 
 	        nodes.push(_reactAddons2['default'].createElement(
@@ -28170,8 +28178,8 @@
 	})(_reactAddons2['default'].Component);
 
 	;
-	Blocks.propTypes = { size: _reactAddons2['default'].PropTypes.number, mines: _reactAddons2['default'].PropTypes.array };
-	Blocks.defaultProps = { size: 7, mines: [] };
+	Blocks.propTypes = { size: _reactAddons2['default'].PropTypes.number, mines: _reactAddons2['default'].PropTypes.array, of: _reactAddons2['default'].PropTypes.string };
+	Blocks.defaultProps = { size: 7, mines: [], of: null };
 
 	exports['default'] = Blocks;
 	module.exports = exports['default'];
@@ -28310,13 +28318,13 @@
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "main.css"
+	module.exports = __webpack_require__.p + "/statics/main.css"
 
 /***/ },
 /* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "1942.ttf"
+	module.exports = __webpack_require__.p + "/statics/1942.ttf"
 
 /***/ }
 /******/ ]);

@@ -22,8 +22,11 @@ func Start(addr string) {
 	// initialize router
 	router := httprouter.New()
 
-	// make routes
+	// file routes
 	router.GET("/", home)
+	router.ServeFiles("/statics/*filepath", http.Dir("../../../client/dist/statics"))
+
+	// socket route
 	router.GET("/players/:id", addPlayer)
 
 	// start listening to incoming connections
@@ -50,5 +53,5 @@ func addPlayer(rw http.ResponseWriter, req *http.Request, params httprouter.Para
 
 func home(rw http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	rw.Header().Set("Content-Type", "text/html; charset=utf-8")
-	http.ServeFile(rw, req, "../client/dist/index.html")
+	http.ServeFile(rw, req, "../../../client/dist/index.html")
 }
