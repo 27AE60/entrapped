@@ -21,6 +21,10 @@
   background-color: #C8C8C8;
 }
 
+.block__life {
+  background: url('life.png')
+}
+
 .block__dead {
   background: url('bomb.png')
 }

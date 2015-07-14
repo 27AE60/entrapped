@@ -9,7 +9,8 @@ module.exports = {
     './src/templates/index.html',
     './src/styles/main.css',
     './src/public/font/1942.ttf',
-    './src/public/pic/bomb.png'
+    './src/public/pic/bomb.png',
+    './src/public/pic/life.png'
   ],
 
   output: {
