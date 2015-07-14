@@ -24,7 +24,7 @@ func Start(addr string) {
 
 	// file routes
 	router.GET("/", home)
-	router.ServeFiles("/statics/*filepath", http.Dir("../../../client/dist/statics"))
+	router.ServeFiles("/statics/*filepath", http.Dir("client/dist/statics"))
 
 	// socket route
 	router.GET("/players/:id", addPlayer)
