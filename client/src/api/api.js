@@ -21,8 +21,9 @@ module.exports = {
       };
 
       conn.onmessage = function(evt) {
+        //console.log('data from server', evt);
         var data =  _.getObject(evt.data);
-      
+
         //console.log('data', data);
         AppDispatcher.handleServerAction(data);
       };
@@ -32,7 +33,11 @@ module.exports = {
   },
 
   send: function(data) {
-    console.log('sending ', data);
+    //console.log('sending ', data);
     conn.send(data);
+  },
+
+  close: function() {
+    conn.close();
   }
 };

@@ -18,20 +18,36 @@ var AppConstants = require('../constants/app_constants.js');
  * Mines position (x, y) from array can be calculated by,:
  *    x : index of an element / size of minesfield
  *    y : index of an element % size of minesfield
+ *
+ *  var mines = [
+ *    0, -1, 0, 0, 0, 0, 0,
+ *    0, 0, 0, 2, 0, 0, -1,
+ *    0, -2, 0, 0, 0, 0, 0,
+ *    0, 0, 0, -1, 0, 0, 0,
+ *    0, 0, 0, -1, 0, 0, 0,
+ *    0, 0, 0, 0, 0, 0, -1,
+ *    0, 0, 0, 0, 0, 0, -1,
+ *  ];
  */
 
-var mines = [
-  0, -1, 0, 0, 0, 0, 0,
-  0, 0, 0, 2, 0, 0, -1,
-  0, -2, 0, 0, 0, 0, 0,
-  0, 0, 0, -1, 0, 0, 0,
-  0, 0, 0, -1, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, -1,
-  0, 0, 0, 0, 0, 0, -1,
-];
+var getMatrix = function(size) {
+  return Array.apply(null, Array(size * size)).map(Number.prototype.valueOf, -9);
+};
 
 /* username */
-var username = '';
+var player = {
+  'username' : '',
+  'life' : 5,
+  'size' : 0
+};
+
+var enemy = {
+  'username' : '',
+  'life' : 5,
+  'size' : 0
+};
+
+var CHANGE_EVENT = "change";
 
 var MinesStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -46,16 +62,20 @@ var MinesStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  'getMines': function() {
-    return mines;
-  },
-
   'addUsername': function(name) {
-    username = name;
+    player.username = name;
   },
 
   'getUsername': function() {
-    return username;
+    return player.username;
+  },
+
+  'getEnemy': function() {
+    return enemy;
+  },
+
+  'getUser': function() {
+    return player;
   }
 });
 
@@ -64,23 +84,44 @@ MinesStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   switch(action.type) {
     case 'registered':
-      console.log('user registered');
+      player.life = action.payload.life;
+      player.size = action.payload.size;
+      MinesStore.emitChange();
       break;
 
     case 'ready':
-      console.log('ready');
+      /* got an opponent */
+      enemy.username = action.payload.name;
+      enemy.life = action.payload.life;
+      enemy.size = action.payload.size;
+      /* only when ready, show the minefields */
+      enemy.mines = getMatrix(enemy.size);
+      player.mines = getMatrix(player.size);
+      MinesStore.emitChange();
       break;
 
     case 'open':
-      console.log('open');
+      console.log('open', action);
       break;
 
     case 'result':
-      console.log('result');
+      var idx = +action.payload.idx,
+        life = +action.payload.life,
+        type = +action.payload.type;
+
+      player.mines[idx] = type;
+      player.life = life;
+      MinesStore.emitChange();
       break;
 
     case 'enemy':
-      console.log('enemy');
+      var idx = +action.payload.idx,
+      life = +action.payload.life,
+      type = +action.payload.type;
+
+      enemy.mines[idx] = type;
+      enemy.life = life;
+      MinesStore.emitChange();
       break;
 
     default:

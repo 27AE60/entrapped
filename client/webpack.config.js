@@ -16,7 +16,7 @@ module.exports = {
     path: __dirname + '/dist'
   },
 
-  debug : false,
+  debug : true,
 
   module: {
     loaders: [

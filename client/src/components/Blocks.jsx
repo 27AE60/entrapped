@@ -19,7 +19,7 @@ class Block extends React.Component {
     var cx = React.addons.classSet;
     var classes = cx({
       'block': true,
-      'block__visited': this.props.status === -1,
+      'block__visited': this.props.status === 0 || this.props.status === 9,
       'block__dead': this.props.status === -2
     });
 
@@ -42,7 +42,6 @@ class Blocks extends React.Component {
   }
 
   render() {
-
     var nodes = [];
     var size = this.props.size;
 
