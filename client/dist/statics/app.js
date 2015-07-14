@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "539890310c4b243e1955"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c78e4f1ef96b62c384db"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -28200,7 +28200,7 @@
 
 	var _ = __webpack_require__(244);
 
-	var apiUrl = 'ws://192.168.0.103:7000';
+	var apiUrl = 'ws://entrapped.herokuapp.com';
 
 	/* websocket reference */
 	var conn = null;
