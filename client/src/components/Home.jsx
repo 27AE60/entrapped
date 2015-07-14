@@ -8,6 +8,14 @@ class Home extends React.Component {
     MinesStore.addUsername(e.target.value);
   }
 
+  verifyName() {
+    if (MinesStore.getUsername() == "") {
+	alert('Please enter the nickname');
+	return false;
+    }
+    return true;
+  }
+
   render() {
     return (
       <div className="home">
@@ -16,7 +24,7 @@ class Home extends React.Component {
         <div className="nickname">
           <input className="nickname__input" placeholder="nickname" onChange={this.handleChange}/>
         </div>
-        <Link to="/minefield">Play</Link>
+        <Link to="/minefield" onClick={this.verifyName}>Play</Link>
       </div>
     )
   }
