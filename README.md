@@ -10,6 +10,8 @@ change url in src/api/api.js to 'localhost:7000'
 npm install 
 npm run start
 
+open in browser: http://localhost:3000/webpack-dev-server/
+
 /* production */
 npm run build
 ```
