@@ -14,7 +14,7 @@
 .block__enemy {
   width: 45px;
   height: 45px;
-  background-color: #666;
+  background-color: rgba(26, 107, 144, 0.15);
 }
 
 .block__visited {
