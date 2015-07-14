@@ -8,6 +8,8 @@ import (
 type connectionhub struct {
 	// registered connections
 	troopers map[*trooper]bool
+	// nick finding
+	nick map[string]*trooper
 	// matches active
 	matches map[*trooper]*trooper
 	// register requests
@@ -22,6 +24,7 @@ type connectionhub struct {
 
 var ch = &connectionhub{
 	troopers: make(map[*trooper]bool),
+	nick:     make(map[string]*trooper),
 	matches:  make(map[*trooper]*trooper),
 	enter:    make(chan *trooper),
 	dead:     make(chan *trooper),
@@ -39,16 +42,21 @@ func (ch *connectionhub) run() {
 	for {
 		select {
 		case t := <-ch.enter:
-			ch.troopers[t] = false
-			for key, val := range ch.troopers {
-				if !val && key != t {
-					ch.matches[t] = key
-					ch.matches[key] = t
-					p1Tag := readyState + "[name=" + t.nickname + "]"
-					key.data <- []byte(p1Tag)
-					p2Tag := readyState + "[name=" + key.nickname + "]"
-					t.data <- []byte(p2Tag)
-					break
+			if _, ok := ch.nick[t.nickname]; ok {
+				t.data <- []byte("error:not unique name")
+			} else {
+				ch.nick[t.nickname] = t
+				ch.troopers[t] = false
+				for key, val := range ch.troopers {
+					if !val && key != t {
+						ch.matches[t] = key
+						ch.matches[key] = t
+						p1Tag := readyState + "[name=" + t.nickname + "]"
+						key.data <- []byte(p1Tag)
+						p2Tag := readyState + "[name=" + key.nickname + "]"
+						t.data <- []byte(p2Tag)
+						break
+					}
 				}
 			}
 		case t := <-ch.dead:
