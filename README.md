@@ -5,7 +5,7 @@ git clone git@github.com:SKatiyar/entrapped.git
 
 #### client setup 
 ```
-change url in src/api.js to 'localhost:7000'
+change url in src/api/api.js to 'localhost:7000'
 
 npm install 
 npm run start
