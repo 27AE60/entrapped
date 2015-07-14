@@ -16,7 +16,7 @@ class Field extends React.Component {
     });
 
     var nodes = [];
-    for (var i = 1; i <= 5; i++) {
+    for (var i = 1; i <= 8; i++) {
       var classname = "fa fa-2x fa-heartbeat heart-icons";
       
       if (i <= this.props.player.life) {

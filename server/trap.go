@@ -5,9 +5,9 @@ type trap struct {
 	lifes   int
 }
 
-func makeTrap(size, numBombs, lifes int) *trap {
+func makeTrap(size, numBombs, numBonusLifes, lifes int) *trap {
 	return &trap{
-		trapMap: createEmptyMineField(size).addRandomBombs(numBombs),
+		trapMap: createEmptyMineField(size).addRandomBombs(numBombs).addRandomLifes(numBonusLifes),
 		lifes:   lifes,
 	}
 }
@@ -21,6 +21,9 @@ func (t *trap) open(idx int) (int, int, string) {
 		ele := t.trapMap.checkIndex(idx)
 		if ele == mine {
 			t.lifes--
+			return ele, t.lifes, ""
+		} else if ele == bonusLife {
+			t.lifes++
 			return ele, t.lifes, ""
 		} else {
 			return ele, t.lifes, ""
