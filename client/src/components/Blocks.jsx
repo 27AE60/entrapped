@@ -36,6 +36,9 @@ class Block extends React.Component {
 
     var msg = "data:open:[idx=" + this.props.index + "]:[help=9]";
     Api.send(msg);
+
+    /* beep is a global function intended for fun */
+    beep();
   }
 };
 Block.propTypes = { status: React.PropTypes.number, index: React.PropTypes.number, of: React.PropTypes.string };

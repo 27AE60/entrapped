@@ -12,8 +12,8 @@ module.exports = {
   ],
 
   output: {
-    filename: 'app.js',
-    path: __dirname + '/dist'
+    filename: '/statics/app.js',
+    path: __dirname + '/dist',
   },
 
   debug : true,
@@ -36,12 +36,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "file?name=[name].[ext]",
+        loader: "file?name=/statics/[name].[ext]",
       },
       {
         test: /\.ttf$/,
-        loader: "file?name=[name].[ext]",
-      }
+        loader: "file?name=/statics/[name].[ext]",
+      },
     ]
   },
 
