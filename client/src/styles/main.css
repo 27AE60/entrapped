@@ -22,7 +22,7 @@
 }
 
 .block__dead {
-  background-color: #D36B6B;
+  background: url('bomb.png')
 }
 
 

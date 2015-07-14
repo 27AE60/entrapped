@@ -8,7 +8,8 @@ module.exports = {
     './src/app.jsx',
     './src/templates/index.html',
     './src/styles/main.css',
-    './src/public/font/1942.ttf'
+    './src/public/font/1942.ttf',
+    './src/public/pic/bomb.png'
   ],
 
   output: {
@@ -40,6 +41,10 @@ module.exports = {
       },
       {
         test: /\.ttf$/,
+        loader: "file?name=/statics/[name].[ext]",
+      },
+      {
+        test: /\.png$/,
         loader: "file?name=/statics/[name].[ext]",
       },
     ]
