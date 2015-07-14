@@ -9,6 +9,9 @@ change url in src/api/api.js to 'localhost:7000'
 
 npm install 
 npm run start
+
+/* production */
+npm run build
 ```
 
 #### server setup
