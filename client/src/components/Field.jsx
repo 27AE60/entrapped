@@ -28,7 +28,7 @@ class Field extends React.Component {
 
     return (
       <div className={classes}>
-        <Blocks size={7} mines={this.props.player.mines} />
+        <Blocks size={this.props.player.size} mines={this.props.player.mines} of={this.props.of} />
         <div className="life-status">
           <span>
             {nodes} 
