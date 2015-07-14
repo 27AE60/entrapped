@@ -18,7 +18,8 @@ class Block extends React.Component {
   render() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'block': true,
+      'block': this.props.of !== "player",
+      'block__enemy': this.props.of === "player",
       'block__visited': this.props.status === 0 || this.props.status === 9,
       'block__dead': this.props.status === -2
     });
@@ -29,12 +30,16 @@ class Block extends React.Component {
   }
 
   handleClick() {
+    if (this.props.of === "player") {
+      return;
+    }
+
     var msg = "data:open:[idx=" + this.props.index + "]:[help=9]";
     Api.send(msg);
   }
 };
-Block.propTypes = { status: React.PropTypes.number, index: React.PropTypes.number };
-Block.defaultProps = { status: 0, index: 0 };
+Block.propTypes = { status: React.PropTypes.number, index: React.PropTypes.number, of: React.PropTypes.string };
+Block.defaultProps = { status: 0, index: 0, of: null };
 
 class Blocks extends React.Component {
   constructor(props) {
@@ -51,7 +56,7 @@ class Blocks extends React.Component {
 
       for (var j = 0; j < size; j++) {
         var index = i * size + j;
-        _blocks.push(<Block key={'block-' + index} status={this.props.mines[index]} index={index} />);
+        _blocks.push(<Block key={'block-' + index} status={this.props.mines[index]} index={index} of={this.props.of} />);
       }
 
       nodes.push((<tr key={'blocks-' + i}>{_blocks}</tr>));
@@ -66,7 +71,7 @@ class Blocks extends React.Component {
     );
   }
 };
-Blocks.propTypes = { size: React.PropTypes.number, mines: React.PropTypes.array };
-Blocks.defaultProps = { size: 7, mines: [] }
+Blocks.propTypes = { size: React.PropTypes.number, mines: React.PropTypes.array, of: React.PropTypes.string };
+Blocks.defaultProps = { size: 7, mines: [], of: null }
 
 export default Blocks;
