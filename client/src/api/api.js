@@ -1,8 +1,6 @@
 'use strict';
 
-var MinesStore = require('../../src/stores/minestore.js');
 var AppDispatcher = require('../dispatchers/app_dispatcher.js');
-
 var _ = require('../../src/utility/utils.js');
 
 var apiUrl = "ws://entrapped.herokuapp.com";
