@@ -6,9 +6,14 @@ const (
 )
 
 const (
-	open  int = 9
-	empty int = 0
-	mine  int = -2
+	bonusNumLife int = 3
+)
+
+const (
+	open      int = 9
+	empty     int = 0
+	mine      int = -2
+	bonusLife int = 3
 )
 
 type mineField struct {
@@ -38,7 +43,24 @@ func (m *mineField) addRandomBombs(numBombs int) *mineField {
 		val := m.field[x]
 		if val == empty {
 			m.field[x] = mine
-		} else {
+		} else if val != bonusLife {
+			i--
+		}
+	}
+
+	return m
+}
+
+func (m *mineField) addRandomLifes(numBonusLifes int) *mineField {
+	size := len(m.field)
+
+	for i := 0; i < numBonusLifes; i++ {
+		x := randomInt(size - 1)
+
+		val := m.field[x]
+		if val == empty {
+			m.field[x] = bonusLife
+		} else if val != mine {
 			i--
 		}
 	}

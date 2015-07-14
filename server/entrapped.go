@@ -6,9 +6,10 @@ import (
 )
 
 const (
-	size     int = 7
-	numBombs int = 10
-	lifes    int = 5
+	size          int = 7
+	numBombs      int = 10
+	lifes         int = 5
+	numBonusLifes int = 2
 )
 
 func Start(addr string) {
@@ -46,7 +47,7 @@ func addPlayer(rw http.ResponseWriter, req *http.Request, params httprouter.Para
 		return
 	}
 
-	trap := makeTrap(size, numBombs, lifes)
+	trap := makeTrap(size, numBombs, numBonusLifes, lifes)
 
 	ch.add(&trooper{id, trap, ws, make(chan []byte, 512)})
 }
