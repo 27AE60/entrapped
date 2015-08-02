@@ -1,14 +1,30 @@
 package entrapped
 
-type trap struct {
-	trapMap *mineField
-	lifes   int
+const (
+	bombsPerCellRatio float32 = 0.25
+	lifesPerCellRatio float32 = 0.15
+	empty             int     = 0
+	life              int     = 1
+	mine              int     = -1
+)
+
+type Trap struct {
+	trapMap *MineField
+	health  int
 }
 
-func makeTrap(size, numBombs, numBonusLifes, lifes int) *trap {
+type trapConf struct {
+	width    int
+	height   int
+	numBombs int
+	numLifes int
+	health   int
+}
+
+func makeTrap(params trapConf) *trap {
 	return &trap{
-		trapMap: createEmptyMineField(size).addRandomBombs(numBombs).addRandomLifes(numBonusLifes),
-		lifes:   lifes,
+		trapMap: nil,
+		health:  params.health,
 	}
 }
 
